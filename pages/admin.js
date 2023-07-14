@@ -55,13 +55,13 @@ import {
     useEnsName,
   } from 'wagmi'
   import { ConnectButton } from '@rainbow-me/rainbowkit';
-  import { contractABI,contractAddress } from "./abi/utils/constant";
-  import { contractABI2,contractAddress2 } from "./abi/utils/constant";
-  import { contractABI3,contractAddress3 } from "./abi/utils/constant";
+  import { contractABI,contractAddress } from "../components/abi/utils/constant";
+  import { contractABI2,contractAddress2 } from "../components/abi/utils/constant";
+  import { contractABI3,contractAddress3 } from "../components/abi/utils/constant";
   import { useContractRead } from 'wagmi'
   import { useContractEvent } from 'wagmi'
   import { useContractWrite, usePrepareContractWrite } from 'wagmi'
-  import {ownerAddress} from "./abi/utils/constant";
+  import {ownerAddress} from "../components/abi/utils/constant";
   import { ethers } from "ethers";
   import Dashboard from "./milaswap";
 

@@ -16,7 +16,7 @@ import React, { useEffect, useState } from "react";
 import { FiChevronDown,FiChevronUp,FiCreditCard,} from "react-icons/fi";
 
 
-import { contractABI,contractAddress,contractABI2,contractAddress2,contractABI3,contractAddress3  } from "./abi/utils/constant";
+import { contractABI,contractAddress,contractABI2,contractAddress2,contractABI3,contractAddress3  } from "../components/abi/utils/constant";
 
 
 

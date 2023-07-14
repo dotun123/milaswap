@@ -55,7 +55,7 @@ import {
   useEnsName,
 } from 'wagmi'
 
-import {ownerAddress} from "../../pages/abi/utils/constant"
+import {ownerAddress} from "../abi/utils/constant"
 export const Sidebar = () => {
   const { address} = useAccount()
   
