@@ -103,8 +103,8 @@ import {
 
 
     const { data: milaAllowance, error: allowanceError } = useContractRead({
-      address:contractAddress3,
-      abi: contractABI3,
+      address:contractAddress,
+      abi: contractABI,
        functionName: "allowance",
        args:[address,contractAddress2],
        watch: true,
