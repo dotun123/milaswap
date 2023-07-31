@@ -32,7 +32,7 @@ const AccountDetails = async () => {
 
 
  const transferEvent=(await contract.queryFilter('Transfer')).reverse()
-const set5Transfer= transferEvent.slice(16,18)
+const set5Transfer= transferEvent.slice(0,5)
 
 
  // Create an empty array to store the event data
