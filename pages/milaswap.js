@@ -23,13 +23,15 @@ import { contractABI,contractAddress,contractABI2,contractAddress2,contractABI3,
 
 import { useAccount,useContractRead, useContractWrite, usePrepareContractWrite,useWaitForTransaction } from 'wagmi';
 import { ethers } from "ethers";
-import { Loading,NotConnected,ConnectButtonComp,Sidebar,FailedNotification,Notification } from "../components/global";
+import { Loading,NotConnected,ConnectButtonComp,Sidebar,FailedNotification,Notification,TransferEvent} from "../components/global";
+import { useDebounce } from 'use-debounce';
 
-import { useDebounce } from 'use-debounce'
 
 export default function Dashboard() {
   const [display, changeDisplay] = useState("hide");
   const [value, changeValue] = useState(1);
+ 
+
  
 
   const [sellBnbQuote, setSellBnbQuote] = useState({
@@ -63,6 +65,14 @@ export default function Dashboard() {
   const [tokenId, setTokenId] = useState("");
   const debouncedTokenId = useDebounce(tokenId)
   const { address,  isConnected } = useAccount()
+
+ 
+
+
+
+
+
+
 
 
 
@@ -109,9 +119,6 @@ export default function Dashboard() {
   })
 
 
-
- 
-
   
 
 
@@ -144,7 +151,6 @@ const { config:milaApprove } = usePrepareContractWrite({
       functionName: 'approve',
       args:[contractAddress2,weiValue((tokenId)*ethValue((milaData?milaData[3]:0).toString()))],
     
-  
   
       onSuccess(appSuccess){
     console.log("sucess:",appSuccess);
@@ -179,22 +185,27 @@ const { config:milaApprove } = usePrepareContractWrite({
     let total = usdtTotalSupply;
     setUsdtSupply(total);
   } 
-  // if (totalUsdtBalance) {
+  if (totalUsdtBalance) {
     let bal2 = totalUsdtBalance;
     setUsdtBalance(bal2);
-   }, [isConnected,totalMilaBalance,totalUsdtBalance,milaTotalSupply,usdtTotalSupply,address]);
+   }}, [isConnected,totalMilaBalance,totalUsdtBalance,milaTotalSupply,usdtTotalSupply,address]);
  
 
    useEffect(() => {
-    // Run milaBuy whenever count changes
+
     if (!buyLoading) {
       writeBuy?.()
             }
             else{
               console.log("not loading")
             }
-    
+           
     }, [waitSuccess,isConnected,address]);
+
+
+
+
+
 
   
   
@@ -241,9 +252,7 @@ const handleClick2 = () => {
         {/* SideBar Component */}
         <Sidebar/>
 
-        {/* SideBar Component End */}
-
-        {/* column2 */}
+        
         
         
         <Flex flexDir="column" w={["100%", "100%", "100%"]}>
@@ -259,7 +268,7 @@ const handleClick2 = () => {
   {botSuccess&&<Notification transactionUrl={transactionUrl}/>}
 {(botError)&&<FailedNotification transactionUrl={transactionUrl}/>}
   {(!isConnected)?<NotConnected/>:<ConnectButtonComp />}
-  
+ 
    <Flex alignContent="center">
      
   
@@ -629,7 +638,7 @@ const handleClick2 = () => {
 
                           
                   {(waitSuccess&&buyLoading||botLoading||isFetching||appLoading||waitLoading)?<Loading/>:(<Button w={"50%"} py={5} 
-                      borderRadius="15px" bgColor="#dc35464b"  disabled={tokenId % 1 !== 0 || tokenId > Max || tokenId <"1"}  mt={5}
+                      borderRadius="15px" bgColor="#dc35464b"  disabled={tokenId % 1 !== 0 || tokenId > Max || tokenId <"1" }mt={5}
                         onClick={handleClick2}
                         
                       >Buy MILA</Button>)}
@@ -668,10 +677,6 @@ const handleClick2 = () => {
                           >
                             Spend USDT:{" "}{(tokenId)*ethValue((milaData?milaData[3]:0).toString())}{" $"}
                           </Text>
-                          <Text fontSize="xs" fontWeight="bold">
-                            {/* {buyBnbFromAmount} */}
-                          </Text>
-                          {/* <Text fontSize="xs" fontWeight="bold" >{usdtBalance}</Text> */}
                         </Flex>
                         <Flex
                           flexDir="column"
@@ -813,17 +818,6 @@ const handleClick2 = () => {
                         }}
                       />
 
-                      {/* <IconButton
-                                    icon={display === 'show' ? <FiChevronUp /> : <FiChevronDown />}
-                                    onClick={() => {
-                                        if (display == 'show') {
-                                            changeDisplay('none')
-                                        } else {
-                                            changeDisplay('show')
-                                        }
-                                    }
-
-                                    } /> */}
                       <Divider />
                     </Flex>
 
@@ -951,17 +945,7 @@ const handleClick2 = () => {
                         }}
                       />
 
-                      {/* <IconButton
-                                    icon={display === 'show' ? <FiChevronUp /> : <FiChevronDown />}
-                                    onClick={() => {
-                                        if (display == 'show') {
-                                            changeDisplay('none')
-                                        } else {
-                                            changeDisplay('show')
-                                        }
-                                    }
-
-                                    } /> */}
+               
                       <Divider />
                     </Flex>
 

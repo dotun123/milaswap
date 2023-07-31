@@ -5,7 +5,6 @@ import { Sidebar } from "./sidebar";
 import FailedNotification from "./failedNotification";
 import Notification from "./Notification";
 
-
 export {
     ConnectButtonComp,
     Loading,
@@ -13,4 +12,5 @@ export {
     Sidebar,
     FailedNotification,
     Notification,
+  
 }

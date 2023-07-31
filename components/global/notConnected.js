@@ -32,6 +32,7 @@ import {
     SkeletonCircle,
     SkeletonText,
     Alert,
+    VStack,
   } from "@chakra-ui/react";
 
   import {
@@ -48,25 +49,34 @@ import {
     FiBell,
     FiDroplet,
   } from "react-icons/fi";
-  import React, {useState } from "react";
+  import React, {useState,useContext } from "react";
 import { ConnectButtonComp } from "./ConnectButton";
+import { Etherescan } from "./FetchData";
+
 
 const NotConnected = () => {
     const [display, changeDisplay] = useState("hide");
-
-
+const {eventData}=useContext(Etherescan)
+  const{days}=useContext(Etherescan)
+  const hashUrl="https://mumbai.polygonscan.com/tx/";
   return (
     <Flex
-      h={[null, null, "100vh"]}
-      flexDir={["column", "column", "row"]}
-      overflow="hidden"
+      h={[null, null]}
+      flexDir={["column", "column", "column"]}
+          w="100%"
+       align="center"  
       maxW="2000px"
     >
-  
+    
+    <ConnectButtonComp/>
+   
+   
+
       {/* column 2 */}
       <Flex
-        w={["100%", "100%", "60%", "60%", "75%"]}
-        p="3%"
+        w={["100%", "100%", "100%", "100%", "100%"]}
+        pt="8.5%"
+       
         flexDir="column"
         overflow="auto"
         minH="100vh"
@@ -113,30 +123,55 @@ const NotConnected = () => {
         </Flex>
         <Flex flexDir="column" fontSize="smaller">
           <Flex overflow="auto">
-            <Table variant="unstyled" mt={4}>
-              <Thead>
+            <Table variant="unstyled" mt={4} >
+              <Thead >
                 <Tr color="gray">
-                  <Th> Name of Transation</Th>
-                  <Th> Category</Th>
-                  <Th isNumeric> Cashback</Th>
+                  <Th > Txn Hash</Th>
+                  <Th> 	
+From</Th>
+                  <Th isNumeric> Block</Th>
+                  <Th isNumeric> To</Th>
                   <Th isNumeric> Amount</Th>
+                  <Th isNumeric> Age</Th>
                 </Tr>
               </Thead>
               <Tbody>
-                
+
+              
+              {eventData.map((hash)=>
                 <Tr>
-                  <Td>
+                <VStack>
+              
+                  <Td >
                     <Flex align="center">
                       <Avatar size="sm" mr={2} src="avatar-1.jpg" />
                       <Flex flexDir="column">
                         <Heading size="sm" letterSpacing="tight">
-                          Amazon3
+                           <Link href={(hashUrl+(hash.blockHash))} target="_blank"><Td>{(hash.blockHash).slice(0,35)}{"..."} </Td></Link>
                         </Heading>
                        
                       </Flex>
                     </Flex>
+                    </Td>
+                    </VStack>
+                  <Td isNumeric>   {hash.from}</Td>
+                  <Td isNumeric>
+                  {" "}
+                  {hash.blockNumber}
                   </Td>
-                  <Td> Electronic Devices </Td>
+                <Td>{hash.to}</Td>
+                <Td>{hash.value}{"MILA"}</Td>
+                  
+                {/* {days.map((day)=>
+                 
+                  <Td>{day}  </Td> )} */}
+                  
+                        </Tr> 
+                        )}
+
+                        
+                        
+                  {/* <Td> Electronic Devices </Td>
                   <Td isNumeric> +2$</Td>
                   <Td isNumeric>
                     {" "}
@@ -144,10 +179,10 @@ const NotConnected = () => {
                       -$242
                     </Text>
                     .00
-                  </Td>
-                </Tr>
+                  </Td> */}
+              
              
-                <Tr>
+                {/* <Tr>
                   <Td>
                     <Flex align="center">
                       <Avatar size="sm" mr={2} src="avatar-1.jpg" />
@@ -194,11 +229,11 @@ const NotConnected = () => {
                     </Text>
                     .00
                   </Td>
-                </Tr>
+                </Tr> */}
                 {display === "show" && (
                   <>
-                    {/* {bscScanData?.map((trans) => ( */}
-                    <Tr>
+                    
+                    {/* <Tr>
                       <Td>
                         <Flex align="center">
                           <Avatar size="sm" mr={2} src="avatar-1.jpg" />
@@ -219,8 +254,8 @@ const NotConnected = () => {
                         </Text>
                         .00
                       </Td>
-                    </Tr>
-                    {/* ))} */}
+                    </Tr> */}
+                    
                   </>
                 )}
               </Tbody>
@@ -243,20 +278,7 @@ const NotConnected = () => {
         </Flex>
       </Flex>
       
-      <Flex
-        w={["100%", "100%", "40%"]}
-        minW={[null, null, "300px", "300px", "550px"]}
-        bgColor="#F5F5F5"
-        p="3%"
-        flexDir="column"
-        overflow="auto"
-       
-      >
-      
-        <ConnectButtonComp/>
-
-       
-      </Flex>
+     
     </Flex>
   )
 }

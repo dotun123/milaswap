@@ -10,13 +10,14 @@ import {
 } from '@rainbow-me/rainbowkit';
 import { configureChains, createConfig, WagmiConfig } from 'wagmi';
 import { mainnet, polygon, optimism, arbitrum,sepolia, polygonMumbai} from 'wagmi/chains';
-
+import { alchemyProvider } from 'wagmi/providers/alchemy';
 import { publicProvider } from 'wagmi/providers/public';
-
+import { FetchData2 } from '../components/global/FetchData';
 
 const { chains, publicClient,  } = configureChains(
   [mainnet, polygon, optimism, arbitrum,sepolia,polygonMumbai],
   [
+    alchemyProvider({ apiKey:"vn61eXIkpvUX5dPgfdirJyhHzm93wQNW" }),
     publicProvider()
   ]
 );
@@ -35,7 +36,7 @@ const wagmiConfig = createConfig({
 
 function MyApp({ Component, pageProps }) {
   return (
-    
+    <FetchData2>
     <WagmiConfig config={wagmiConfig}>
       <RainbowKitProvider chains={chains} >
       <ChakraProvider>
@@ -43,7 +44,7 @@ function MyApp({ Component, pageProps }) {
       </ChakraProvider>
     </RainbowKitProvider>
     </WagmiConfig>
-    
+    </FetchData2>
   )
 }
 
