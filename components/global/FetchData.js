@@ -32,7 +32,7 @@ const AccountDetails = async () => {
 
 
  const transferEvent=(await contract.queryFilter('Transfer')).reverse()
-const set5Transfer= transferEvent.slice(0,5)
+const set5Transfer= transferEvent.slice(0,10)
 
 
  // Create an empty array to store the event data
@@ -45,15 +45,15 @@ const set5Transfer= transferEvent.slice(0,5)
      to: event.args.to,
      value: ethers.utils.formatEther( (event.args.value)),
      blockNumber:event.blockNumber,
-     blockHash:event.blockHash,
-    
+    transactionHash:event.transactionHash,
+    blockHash:event.blockHash
    };
    // Push the object to the array
    eventData.push(eventObject);
  }
- // Return the array of event data
 
  
+  
  const BlockHash = eventData.map( (tx) => tx.blockHash);
 
 
@@ -77,7 +77,7 @@ const set5Transfer= transferEvent.slice(0,5)
     timestamps.push(block.timestamp);
   }
 
-
+console.log(timestamps)
 
 
 
@@ -87,14 +87,16 @@ const set5Transfer= transferEvent.slice(0,5)
   // Loop through the key array and get the block details for each hash
   for (let Ages of timestamps) {
     // Get the block object from the provider
-    const date = new Date(Ages * 1000);
-
-    const durationInSeconds = Date.now() / 1000 - Ages;
-    const durationInHours = Math.floor(durationInSeconds / 3600);
-    const durationInDays = Math.floor(durationInHours / 24);
-
-    // Push the timestamp property to the timestamps array
-    days.push(`${durationInDays} days ${durationInHours} hours`);
+   
+    const durationInSeconds = (Date.now() / 1000) - Ages;
+   
+    const durationInHours = (durationInSeconds / 3600);
+    const durationInDays =(durationInHours / 24);
+    
+    let intDays = Math.floor(durationInDays);
+    let hours = Math.round((durationInDays - intDays) * 24);
+    // Return a formatted string with days and hours
+   days.push(`${intDays} days and ${hours} hours`);
     
   }
  

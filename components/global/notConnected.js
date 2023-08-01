@@ -59,6 +59,10 @@ const NotConnected = () => {
 const {eventData}=useContext(Etherescan)
   const{days}=useContext(Etherescan)
   const hashUrl="https://mumbai.polygonscan.com/tx/";
+  const blockUrl="https://mumbai.polygonscan.com/block/";
+const toUrl="https://mumbai.polygonscan.com/address/"
+
+
   return (
     <Flex
       h={[null, null]}
@@ -75,14 +79,15 @@ const {eventData}=useContext(Etherescan)
       {/* column 2 */}
       <Flex
         w={["100%", "100%", "100%", "100%", "100%"]}
-        pt="8.5%"
        
+       pt={8}
         flexDir="column"
         overflow="auto"
         minH="100vh"
-       
+      
       >
-        <Heading fontWeight="normal">
+    
+        <Heading fontWeight="normal" >
           Milala,{" "}
           <Flex fontWeight="bold" display="inline-flex">
             Blockchain.
@@ -91,173 +96,70 @@ const {eventData}=useContext(Etherescan)
         <Text color="gray" fontSize="sm">
           Invest in African Businesses from anywhere
         </Text>
-        <Text fontWeight="bold" fontSize="2xl">
-          Connect Wallet
-        </Text>
-        <Flex justifyContent="space-between" mt={8} align="center">
-          <Text fontSize="sm" color="gray.700" fontWeight="bold">
-            MILA/USDT: 
-          </Text>
-          <Button
-            borderRadius="20px"
-            w="auto"
-            boxShadow="xl"
-            variant="outline"
-            fontSize="x-small"
-            mr={0}
-          >
-            24hr
-          </Button>
-        </Flex>
+      
         
-        <Flex justifyContent="space-between" mt={8}>
+        <Flex  mt={8}>
           <Flex align="flex-end">
             <Heading as="h2" size="lg" letterSpacing="Tight">
               Transactions
             </Heading>
             <Text fontSize="sm" color="gray" ml={4}>
-              Apr 2021
+      
             </Text>
           </Flex>
-          <IconButton icon={<FiCalendar />} />
+         
         </Flex>
         <Flex flexDir="column" fontSize="smaller">
           <Flex overflow="auto">
-            <Table variant="unstyled" mt={4} >
+            <Table variant="unstyled" mt={2} >
               <Thead >
                 <Tr color="gray">
                   <Th > Txn Hash</Th>
                   <Th> 	
 From</Th>
                   <Th isNumeric> Block</Th>
-                  <Th isNumeric> To</Th>
-                  <Th isNumeric> Amount</Th>
                   <Th isNumeric> Age</Th>
+                  <Th isNumeric> To</Th>
+                  <Th isNumeric>Amount</Th>
                 </Tr>
               </Thead>
               <Tbody>
 
               
-              {eventData.map((hash)=>
-                <Tr>
+              {eventData.map((hash,index)=>
+                <Tr >
                 <VStack>
               
                   <Td >
                     <Flex align="center">
                       <Avatar size="sm" mr={2} src="avatar-1.jpg" />
-                      <Flex flexDir="column">
-                        <Heading size="sm" letterSpacing="tight">
-                           <Link href={(hashUrl+(hash.blockHash))} target="_blank"><Td>{(hash.blockHash).slice(0,35)}{"..."} </Td></Link>
-                        </Heading>
+                     
                        
-                      </Flex>
+                           <Link color="blue" href={(hashUrl+(hash.transactionHash))}  _hover={{ textDecor: "none" }} target="_blank">{(hash.transactionHash).slice(0,24)}{"..."} </Link>
+                       
+                       
+                     
                     </Flex>
                     </Td>
                     </VStack>
-                  <Td isNumeric>   {hash.from}</Td>
-                  <Td isNumeric>
-                  {" "}
-                  {hash.blockNumber}
+                  <Td >   {(hash.from).slice(0,24)}{"..."}</Td>
+                  <Td >
+                  <Link color="blue" href={(blockUrl+(hash.blockNumber))}  _hover={{ textDecor: "none" }} target="_blank">{(hash.blockNumber)} </Link>
+              
                   </Td>
-                <Td>{hash.to}</Td>
+                  {days[index]?(<td>{days[index]}</td>):(<td>days and hours</td>)}
+                <Td> <Link color="blue" href={(toUrl+(hash.to))}  _hover={{ textDecor: "none" }} target="_blank">{(hash.to).slice(0,24)}{"..."} </Link></Td>
                 <Td>{hash.value}{"MILA"}</Td>
                   
-                {/* {days.map((day)=>
-                 
-                  <Td>{day}  </Td> )} */}
+               
                   
                         </Tr> 
                         )}
 
                         
-                        
-                  {/* <Td> Electronic Devices </Td>
-                  <Td isNumeric> +2$</Td>
-                  <Td isNumeric>
-                    {" "}
-                    <Text fontWeight="bold" display="inline-table">
-                      -$242
-                    </Text>
-                    .00
-                  </Td> */}
-              
-             
-                {/* <Tr>
-                  <Td>
-                    <Flex align="center">
-                      <Avatar size="sm" mr={2} src="avatar-1.jpg" />
-                      <Flex flexDir="column">
-                        <Heading size="sm" letterSpacing="tight">
-                          Amazon
-                        </Heading>
-                        <Text fontSize="sm" color="gray">
-                          Apr 24, 2021 at 1:40pm
-                        </Text>
-                      </Flex>
-                    </Flex>
-                  </Td>
-                  <Td> Electronic Devices </Td>
-                  <Td isNumeric> +2$</Td>
-                  <Td isNumeric>
-                    {" "}
-                    <Text fontWeight="bold" display="inline-table">
-                      -$242
-                    </Text>
-                    .00
-                  </Td>
-                </Tr>
-                <Tr>
-                  <Td>
-                    <Flex align="center">
-                      <Avatar size="sm" mr={2} src="avatar-1.jpg" />
-                      <Flex flexDir="column">
-                        <Heading size="sm" letterSpacing="tight">
-                          Amazon
-                        </Heading>
-                        <Text fontSize="sm" color="gray">
-                          Apr 24, 2021 at 1:40pm
-                        </Text>
-                      </Flex>
-                    </Flex>
-                  </Td>
-                  <Td> Electronic Devices </Td>
-                  <Td isNumeric> +2$</Td>
-                  <Td isNumeric>
-                    {" "}
-                    <Text fontWeight="bold" display="inline-table">
-                      -$242
-                    </Text>
-                    .00
-                  </Td>
-                </Tr> */}
-                {display === "show" && (
-                  <>
                     
-                    {/* <Tr>
-                      <Td>
-                        <Flex align="center">
-                          <Avatar size="sm" mr={2} src="avatar-1.jpg" />
-                          <Flex flexDir="column">
-                            <Heading size="sm" letterSpacing="tight">
-                              Amazon2
-                            </Heading>
-                          
-                          </Flex>
-                        </Flex>
-                      </Td>
-                      <Td> Electronic Devices </Td>
-                      <Td isNumeric> +2$</Td>
-                      <Td isNumeric>
-                        {" "}
-                        <Text fontWeight="bold" display="inline-table">
-                          -$242
-                        </Text>
-                        .00
-                      </Td>
-                    </Tr> */}
-                    
-                  </>
-                )}
+                 
+               
               </Tbody>
             </Table>
           </Flex>
