@@ -102,7 +102,7 @@ return (
       <Flex  mt={8}>
         <Flex align="flex-end">
           <Heading as="h2" size="lg" letterSpacing="Tight">
-           Monthly Transactions
+           Weekly Transactions
           </Heading>
           <Text fontSize="sm" color="gray" ml={4}>
     
