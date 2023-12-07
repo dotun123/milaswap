@@ -99,44 +99,10 @@ export const Sidebar = () => {
                   mr={[2, 6, 0, 0, 0]}
                   mb={[0, 0, 6, 6, 6]}
                 >
-                  <Link display={["none", "none", "flex", "flex", "flex"]}>
+                  <Link href="/home" display={["none", "none", "flex", "flex", "flex"]}>
                     <Icon as={FiHome} fontSize="2xl" />
                   </Link>
-                  <Link
-                    _hover={{ textDecor: "none" }}
-                    display={["flex", "flex", "none", "flex", "flex"]}
-                  >
-                    <Text>Home</Text>
-                  </Link>
-                </Flex>
-                <Flex
-                  className="sidebar-items"
-                  mr={[2, 6, 0, 0, 0]}
-                  mb={[0, 0, 6, 6, 6]}
-                >
-                  <Link display={["none", "none", "flex", "flex", "flex"]}>
-                    <Icon
-                      as={FiDroplet}
-                      fontSize="2xl"
-                      className="active-icon"
-                    />
-                  </Link>
-                  <Link href="/milaswap"
-                    _hover={{ textDecor: "none" }}
-                    display={["flex", "flex", "none", "flex", "flex"]}
-                  >
-                    <Text className="active">Dashboard </Text>
-                  </Link>
-                </Flex>
-                <Flex
-                  className="sidebar-items"
-                  mr={[2, 6, 0, 0, 0]}
-                  mb={[0, 0, 6, 6, 6]}
-                >
-                  <Link display={["none", "none", "flex", "flex", "flex"]}>
-                    <Icon as={FiPieChart} fontSize="2xl" />
-                  </Link>
-                  <Link
+                  <Link href="/home"
                     _hover={{ textDecor: "none" }}
                     display={["flex", "flex", "none", "flex", "flex"]}
                   >
@@ -148,10 +114,45 @@ export const Sidebar = () => {
                   mr={[2, 6, 0, 0, 0]}
                   mb={[0, 0, 6, 6, 6]}
                 >
-                  <Link display={["none", "none", "flex", "flex", "flex"]}>
+                  <Link href="/milaswap" display={["none", "none", "flex", "flex", "flex"]}>
+                    <Icon
+                      as={FiDroplet}
+                      fontSize="2xl"
+                      className="active-icon"
+                    />
+                  </Link>
+                  <Link href="/milaswap"
+                    _hover={{ textDecor: "none" }}
+                    display={["flex", "flex", "none", "flex", "flex"]}
+                  >
+                    <Text >Dashboard </Text>
+                  </Link>
+                </Flex>
+                <Flex
+                  className="sidebar-items"
+                  mr={[2, 6, 0, 0, 0]}
+                  mb={[0, 0, 6, 6, 6]}
+                >
+                  <Link href="/month" display={["none", "none", "flex", "flex", "flex"]}>
+                    <Icon as={FiPieChart} fontSize="2xl" />
+                  </Link>
+                  <Link href="/month"
+                    _hover={{ textDecor: "none" }}
+                    display={["flex", "flex", "none", "flex", "flex"]}
+                  >
+                    <Text>Transaction</Text>
+                  </Link>
+                </Flex>
+                <Flex
+                  className="sidebar-items"
+                  mr={[2, 6, 0, 0, 0]}
+                  mb={[0, 0, 6, 6, 6]}
+                >
+                  <Link href="/connectedAddress" display={["none", "none", "flex", "flex", "flex"]}>
                     <Icon as={FiBox} fontSize="2xl" />
                   </Link>
                   <Link
+                  href="/connectedAddress"
                     _hover={{ textDecor: "none" }}
                     display={["flex", "flex", "none", "flex", "flex"]}
                   >
