@@ -17,6 +17,8 @@ export const FetchData2 = ({ children }) => {
   const [uniqueFromAddresses, setUniqueFromAddresses] = useState([]);
   const [eventData, setEventData] = useState([]);
   const [eventData2, setEventData2] = useState([]);
+  const [eventData3, setEventData3] = useState([]);
+
 
   const AccountDetails = async () => {
     const transferEvent = (await contract.queryFilter('Transfer')).reverse();
@@ -31,7 +33,8 @@ export const FetchData2 = ({ children }) => {
     setUniqueFromAddresses(uniqueAddresses);
     setUniqueAddressLength(uniqueAddresses.length);
 
-    const set5Transfer = transferEvent.slice(0, 10);
+    
+    const set5Transfer = transferEvent.slice(0, 15);
 
     const blockHashes = set5Transfer.map((event) => event.blockHash);
     const blockPromises = blockHashes.map((hash) => provider.getBlock(hash));
@@ -63,8 +66,14 @@ export const FetchData2 = ({ children }) => {
     setDays(durations);
 
     const thirtyOneDaysEvents = set5Transfer.filter((event, index) => {
-      return durations[index].includes('days') && parseInt(durations[index]) <= 8;
+      return durations[index].includes('days') && parseInt(durations[index]) <= 135;
     });
+
+    const EightDaysEvents = set5Transfer.filter((event, index) => {
+      return durations[index].includes('days') && parseInt(durations[index]) <= 135;
+    });
+
+
 
     const eventData2Array = thirtyOneDaysEvents.map((event) => ({
       from: event.args.from,
@@ -74,18 +83,26 @@ export const FetchData2 = ({ children }) => {
       transactionHash: event.transactionHash,
       blockHash: event.blockHash,
     }));
+    const eventData3Array = EightDaysEvents.map((event) => ({
+      from: event.args.from,
+      to: event.args.to,
+      value: ethers.utils.formatEther(event.args.value),
+      blockNumber: event.blockNumber,
+      transactionHash: event.transactionHash,
+      blockHash: event.blockHash,
+    }));
 
     setEventData2(eventData2Array);
+    setEventData3(eventData3Array);
   };
 
+
+  
   useEffect(() => {
     const fetchData = async () => {
       await AccountDetails();
 
-      console.log('Wallet address:', uniqueFromAddresses.slice(0, 30));
-      console.log('Unique address length:', uniqueAddressLength);
-      console.log('Event Data:', eventData);
-      console.log('Event Data 2 (within 31 days):', eventData2);
+     
     };
 
     fetchData();
@@ -101,6 +118,7 @@ export const FetchData2 = ({ children }) => {
         uniqueFromAddresses,
         eventData,
         eventData2,
+        eventData3,
       }}
     >
       {children}

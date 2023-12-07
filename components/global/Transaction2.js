@@ -50,7 +50,7 @@ import {
   FiDroplet,
 } from "react-icons/fi";
 import React, {useState,useContext } from "react";
-import { ConnectButtonComp } from "./ConnectButton";
+
 import { Etherescan } from "./FetchData";
 
 
@@ -73,7 +73,7 @@ return (
     maxW="2000px"
   >
   
-  <ConnectButtonComp/>
+
  
  
 
@@ -102,7 +102,7 @@ return (
       <Flex  mt={8}>
         <Flex align="flex-end">
           <Heading as="h2" size="lg" letterSpacing="Tight">
-           Weekly Transactions
+           Monthly Transactions
           </Heading>
           <Text fontSize="sm" color="gray" ml={4}>
     

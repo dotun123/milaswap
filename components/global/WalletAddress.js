@@ -26,7 +26,7 @@ import {
   
   } from "react-icons/fi";
   import React, {useState,useContext } from "react";
-import { ConnectButtonComp } from "./ConnectButton";
+
 import { Etherescan } from "./FetchData";
 
 
@@ -56,7 +56,7 @@ const WalletAddress = () => {
         align="center"
         maxW="2000px"
       >
-        <ConnectButtonComp />
+        
   
         {/* column 2 */}
         <Flex

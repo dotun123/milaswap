@@ -38,7 +38,7 @@ import {
   } from "@chakra-ui/react";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import { useAccount } from 'wagmi';
-import { Sidebar,ConnectButtonComp } from '../components/global'
+import { Sidebar } from '../components/global'
 import myAccount from "../public/account.json"
 const ConnectedAddress = () => {
   const [display, changeDisplay] = useState("hide");
@@ -106,7 +106,7 @@ const ConnectedAddress = () => {
             maxW="2000px"
           >
             {/* ... (Your ConnectButtonComp code here) */}
-            <ConnectButtonComp/>
+           
 
             {/* Column 2 */}
             <Flex
